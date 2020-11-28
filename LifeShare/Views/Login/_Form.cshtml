@@ -1,0 +1,46 @@
+@model Login
+
+<div class="mx-auto form-group">
+    <span>Use: admin@gmail.com</span>
+    <div class="form-control-div">
+        <img src="~/images/email.png" width="20px" height="20px"/>
+        <input asp-for="Email" class="form-control" value="admin@gmail.com"/>
+    </div>
+</div>
+<div class="mx-auto form-group">
+    <span>use: admin</span>
+    <div class="form-control-div">
+        <img src="~/images/senha.png" width="20px" height="20px"/>
+        <input asp-for="Senha" type="password"class="form-control" value="admin" />
+    </div>
+</div>
+
+@if (TempData["msg"] != null)
+{
+<mensagem erro="@TempData["msg"]"></mensagem>
+}
+
+<style>
+    .form-control {
+        background-color: #171717;
+        border: none;
+        border-radius: 10px;
+    }
+    .form-control-div {
+        background-color: #171717;
+        display: flex;
+        border: none;
+        border-radius: 10px;
+        align-items: center;
+        margin-left: ;
+    }
+
+    span {
+        color: white;
+        margin-left: 4px;
+    }
+
+    img {
+        margin-left: 5px;
+    }
+</style>

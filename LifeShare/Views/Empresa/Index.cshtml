@@ -1,0 +1,135 @@
+﻿@model List<Empresa>
+
+<nav class="navbar nav navbar-light">
+    <img src="~/images/Logo.png" width="45px" height="45px"/>
+    <form class="form-inline">
+        <button class="logout" asp-controller="Login" asp-action="autenticar">
+            <img class="logout" src="~/images/logout.png" width="20px" height="20px"/>
+        </button>  
+    </form>
+</nav>
+
+@if (TempData["msg"] != null)
+{
+    <mensagem sucesso="@TempData["msg"]"></mensagem>
+}
+<div class="container">
+    <div class="text d-flex flex-column align-items-center">
+        <h4>Empresas</h4>
+        <h4>Conveniadas</h4>
+    </div>
+    <div class="table">
+        <nav class="navbar navbar-light color-orange">
+            <a class="navbar-brand text-white">Lifeshare</a>
+            <form class="form-inline">
+                <button asp-action="pesquisar" class="button-input">Pesquisar por id <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                </svg></button>
+                <button class="rounded-circle" asp-action="cadastrar" alt="Submit">
+                    <img src="~/images/Add.png" width="100%"/>
+                </button>
+            </form>
+        </nav>
+        <table class="table">
+            <tr class="text-orange">
+                <th>Código</th>
+                <th>Nome Empresa</th>
+                <th>Data de entrada</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            @foreach (var empresa in Model)
+            {
+                <tr>
+                    <td>@empresa.EmpresaId</td>
+                    <td>@empresa.Nome</td>
+                    <td>@empresa.DataEntrada.ToShortDateString()</td>
+                    <td>@empresa.Status</td>
+                    <td>
+                        <a asp-action="Editar" class="btn btn-sm" asp-route-id="@empresa.EmpresaId">
+                            <img src="~/images/edit.png"/>
+                        </a>
+                        <!-- Excluir um usuário -->
+                        <!-- Button trigger modal -->
+                        <button onclick="usuarioId.value = @empresa.EmpresaId" type="button" class="btn btn-sm" data-toggle="modal" data-target="#exampleModal">
+                            <img src="~/images/delete.png"/>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmação</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Deseja realmente excluir a empresa?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="remover">
+                    <input type="hidden" name="id" id="usuarioId" />
+                    <button type="button" class="btn text-light btn-light" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn color-orange">Deletar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+    .nav {
+        box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.07);
+    }
+
+    .color-orange {
+        background-color: #FF512F;
+    }
+
+    .table {
+        border: 1px;
+        border-radius: 20px 20px 0px 0px;
+    }
+
+    .logout {
+        border: none;
+        background-color: #ffffff;
+    }
+
+    .rounded-circle{
+        background-color: #FF512F;
+        border: none;
+    }
+
+    .button-input {
+        margin-right: 10px ;
+        border: 0.5px;
+        background-color: #fff;
+        color: #FF512F;
+        padding: 5px 10px;
+        border-radius: 15px;
+    }
+
+    .text-orange {
+        color: #FF512F;
+    }
+
+    .text{
+        margin: 15px 0;
+    }
+
+    .btn-sm {
+        background-color: #fff;
+    }
+
+</style>

@@ -1,0 +1,19 @@
+﻿@model Empresa
+
+@{
+    ViewData["Title"] = "Atualização de Empresa";
+}
+
+<div class="d-flex flex-column align-items-center justify-content-center">
+    <h1>Atualização</h1>
+    <form asp-action="editar">
+        <input asp-for="EmpresaId" />
+
+        <partial name="_FormCadastrar"/>
+
+<div class="d-flex mx-auto justify-content-around">
+        <input type="submit" value="Atualizar" class="btn text-light btn-danger" />
+        <a asp-action="index" class="btn btn-dark">Voltar</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,48 @@
+@model Empresa
+
+
+
+<div class="container d-flex flex-column align-items-center justify-content-center">
+
+    <h1>Pesquisar empresa</h1>
+
+    <form asp-action="pesquisar" asp-controller="empresa">
+    
+        <partial name="_FormPesquisar"/>
+
+        <input type="submit" value="Pesquisar" class="btn text-light btn-danger" />
+        <a asp-action="index" class="btn btn-dark">Lista de empresas</a>
+    </form>
+
+    <table class="table">
+        <tr>
+            <th>Código</th>
+            <th>Nome</th>
+            <th>Data Entrada</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+
+        @if(Model != null)
+        {
+            <tr>
+                <td>@Model.EmpresaId</td>
+                <td>@Model.Nome</td>
+                <td>@Model.DataEntrada.ToShortDateString()</td>
+                <td>@Model.Status</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<style>
+    .text-light {
+        background-color: #FF512F;
+        border: none;
+    }
+
+    h1 {
+        color: #FF512F;
+        margin-top: 80px;
+    }
+</style>

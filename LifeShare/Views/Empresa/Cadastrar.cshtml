@@ -1,0 +1,33 @@
+﻿@model Empresa
+
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+<div class="d-flex flex-column align-items-center justify-content-center">
+
+    <h1>Cadastrar</h1>
+
+    @if (TempData["msg"] != null)
+    {
+    <mensagem sucesso="@TempData["msg"]"></mensagem>
+    }
+
+    <form asp-action="cadastrar" asp-controller="empresa">
+    
+        <partial name="_FormCadastrar"/>
+
+        <input type="submit" value="Cadastrar" class="btn btn-danger" />
+        <a asp-action="index" class="btn btn-dark">Lista de empresas</a>
+    </form> 
+</div>
+
+<style>
+
+    html{
+        width: 100%;
+    }
+
+    .btn-danger {
+       background-color: #FF512F;
+    }
+</style>
